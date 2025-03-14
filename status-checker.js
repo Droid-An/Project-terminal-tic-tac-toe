@@ -27,11 +27,6 @@ function checkRow(board, player, rowNumber) {
   }
   return false;
 }
-let board = [
-  ["X", "_", "_"],
-  ["_", "_", "_"],
-  ["O", "O", "X"],
-];
 
 /*
     Given 3 parameters:
