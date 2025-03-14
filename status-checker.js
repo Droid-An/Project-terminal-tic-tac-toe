@@ -1,4 +1,4 @@
-import { checkIfNoMovesLeft } from './board-printer.js';
+import { checkIfNoMovesLeft } from "./board-printer.js";
 
 /*
     Example board:
@@ -18,7 +18,20 @@ import { checkIfNoMovesLeft } from './board-printer.js';
     Otherwise, return false
 */
 function checkRow(board, player, rowNumber) {
+  if (
+    (board[rowNumber][0] == player) &
+    (board[rowNumber][1] == player) &
+    (board[rowNumber][2] == player)
+  ) {
+    return true;
+  }
+  return false;
 }
+let board = [
+  ["X", "_", "_"],
+  ["_", "_", "_"],
+  ["O", "O", "X"],
+];
 
 /*
     Given 3 parameters:
@@ -29,8 +42,15 @@ function checkRow(board, player, rowNumber) {
     Otherwise, return false
 */
 function checkColumn(board, player, columnNumber) {
+  if (
+    (board[0][columnNumber] == player) &
+    (board[1][columnNumber] == player) &
+    (board[2][columnNumber] == player)
+  ) {
+    return true;
+  }
+  return false;
 }
-
 /*
     Given 2 parameters:
         - a tic-tac-toe board (array of arrays)
@@ -39,43 +59,55 @@ function checkColumn(board, player, columnNumber) {
     Otherwise, return false
 */
 function checkDiagonal(board, player) {
-    // It may be easier to use an if statement than a loop here
+  if (
+    (board[0][0] == player) &
+    (board[1][1] == player) &
+    (board[2][2] == player)
+  ) {
+    return true;
+  } else if (
+    (board[0][2] == player) &
+    (board[1][1] == player) &
+    (board[2][0] == player)
+  ) {
+    return true;
+  }
+  return false;
 }
-
 
 /*
     There is no need to change any code below this line.
 */
 
 function checkIfPlayerWon(board, player) {
-    for(let i = 0; i <= 2; i++) {
-        if(checkRow(board, player, i) || checkColumn(board, player, i)) {
-            return true;
-        }
+  for (let i = 0; i <= 2; i++) {
+    if (checkRow(board, player, i) || checkColumn(board, player, i)) {
+      return true;
     }
+  }
 
-    if(checkDiagonal(board, player)) {
-        return true;
-    }
+  if (checkDiagonal(board, player)) {
+    return true;
+  }
 
-    return false;
+  return false;
 }
 
 export function isGameOver(board) {
-    if(checkIfPlayerWon(board, 'X')) {
-        console.log('X has won the game!\n');
-        return true;
-    }
+  if (checkIfPlayerWon(board, "X")) {
+    console.log("X has won the game!\n");
+    return true;
+  }
 
-    if(checkIfPlayerWon(board, 'O')) {
-        console.log('O has won the game!\n');
-        return true;
-    }
+  if (checkIfPlayerWon(board, "O")) {
+    console.log("O has won the game!\n");
+    return true;
+  }
 
-    if(checkIfNoMovesLeft(board)) {
-        console.log('Game Over - It\s a tie!\n');
-        return true;
-    }
+  if (checkIfNoMovesLeft(board)) {
+    console.log("Game Over - Its a tie!\n");
+    return true;
+  }
 
-    return false;
+  return false;
 }
